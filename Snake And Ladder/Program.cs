@@ -6,6 +6,7 @@ namespace Snake_And_Ladder
     class Program
 
     {
+        int position = 0;
 
         public static int CheckOption()
         {
@@ -20,34 +21,33 @@ namespace Snake_And_Ladder
             int diceNumber = random.Next(1, 7);
             return diceNumber;
         }
-        public static int Play(int option, int diceNumber)
+        public static void Main()
         {
             int position = 0;
-            const int LADDER = 1;
-            const int SNAKE = 2;
-            const int NOPLAY = 3;
-
-            switch (option)
+            while (position != 100)
             {
-                case LADDER:
-                    position += diceNumber;
-                    break;
+                const int LADDER = 1;
+                const int SNAKE = 2;
+                const int NOPLAY = 3;
 
-                case SNAKE:
-                    position -= diceNumber;
-                    break;
+                switch (CheckOption())
+                {
+                    case LADDER:
+                        position += DiceRoll();
+                        break;
 
-                case NOPLAY:
+                    case SNAKE:
+                        position -= DiceRoll();
+                        position = position < 0 ? 0 : position;
+                        break;
 
-                    break;
+                    case NOPLAY:
 
+                        break;
+
+                }
+                Console.WriteLine("Position" + position);
             }
-            return position;
-        }
-        public static void Main(string[] args)
-        {
-            int place = Play(CheckOption(), DiceRoll());
-            Console.WriteLine("Position:" + place);
         }
 
     }
