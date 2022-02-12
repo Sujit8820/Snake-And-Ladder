@@ -13,35 +13,37 @@ namespace Snake_And_Ladder
 
             Random random = new Random();
             int option = random.Next(1, 4);
-            Console.WriteLine("option"+option);
+            // Console.WriteLine("option"+option);
             return option;
         }
         public static int DiceRoll()
         {
             Random random = new Random();
             int diceNumber = random.Next(1, 7);
-            Console.WriteLine("diceno"+diceNumber);
+            // Console.WriteLine("diceno"+diceNumber);
             return diceNumber;
         }
         public static void Main()
         {
             int position = 0;
+            int diceRoll = 0;
             while (position != 100)
             {
                 const int LADDER = 1;
                 const int SNAKE = 2;
                 const int NOPLAY = 3;
-
+                int diceNumber = DiceRoll();
                 switch (CheckOption())
                 {
                     case LADDER:
-                        position += DiceRoll();
-                        position = position >100 ? position -=DiceRoll() : position;
+                        diceRoll++;
+                        position = position + diceNumber > 100 ? position : position + diceNumber;
+
                         break;
 
                     case SNAKE:
-                        position -= DiceRoll();
-                        position = position < 0 ? 0 : position;
+                        diceRoll++;
+                        position = position - diceNumber < 0 ? 0 : position - diceNumber;
                         break;
 
                     case NOPLAY:
@@ -49,7 +51,7 @@ namespace Snake_And_Ladder
                         break;
 
                 }
-                Console.WriteLine("Position" + position);
+                Console.WriteLine("Dice Roll " + diceRoll + " Position " + position);
             }
         }
 
