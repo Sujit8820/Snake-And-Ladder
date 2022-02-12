@@ -13,12 +13,14 @@ namespace Snake_And_Ladder
 
             Random random = new Random();
             int option = random.Next(1, 4);
+            Console.WriteLine("option"+option);
             return option;
         }
         public static int DiceRoll()
         {
             Random random = new Random();
             int diceNumber = random.Next(1, 7);
+            Console.WriteLine("diceno"+diceNumber);
             return diceNumber;
         }
         public static void Main()
@@ -34,6 +36,7 @@ namespace Snake_And_Ladder
                 {
                     case LADDER:
                         position += DiceRoll();
+                        position = position >100 ? position -=DiceRoll() : position;
                         break;
 
                     case SNAKE:
